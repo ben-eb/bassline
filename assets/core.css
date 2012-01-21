@@ -1,0 +1,273 @@
+body
+{
+	margin:0;
+	padding:0;
+	width:100%;
+	min-width:600px;
+	font-size:100%;
+	color:#444;
+}
+.colmask
+{
+	position:relative;
+	clear:both;
+	float:left;
+	width:100%;
+	overflow:hidden;
+}
+.leftmenu, .text-modal
+{
+	background:#26292C;
+}
+.leftmenu .colright
+{
+	float:left;
+	width:200%;
+	position:relative;
+	left:300px;
+	background:#fefefe url(bkg.gif);
+}
+.leftmenu .col1wrap
+{
+	float:right;
+	width:50%;
+	position:relative;
+	right:300px;
+	padding-bottom:1em;
+}
+#content
+{
+	margin:10px 10px 0 310px;
+	position:relative;
+	right:100%;
+	overflow:hidden;
+	background:-webkit-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px);
+	background:-moz-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px);
+}
+#options
+{
+	float:left;
+	width:300px;
+	position:relative;
+	right:300px;
+}
+   /*	Forms
+	--------------------------------- */
+[type="range"], textarea, label, #settings
+{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	width:300px;
+	font-size:12px;
+	line-height:18px;
+}
+[type="range"], textarea
+{
+	border:0;
+	border-top:1px solid #3b3f44;
+	border-bottom:1px solid #121416;
+	display:block;
+	background:#2a2d30;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	padding:.25em 10px;
+	margin:0;
+}
+[type="range"]
+{
+	line-height:18px;
+	font-size:24px;
+	color:#fff;
+}
+textarea
+{
+	height:170px;
+	color:#ffe9c5;
+	-webkit-transition:background .3s ease-in-out;
+}
+textarea:focus
+{
+	outline:none;
+	background:#2F3337;
+}
+input, label
+{
+	float:left;
+}
+.check
+{
+	width:272px;
+	background:transparent;
+	border:0;
+}
+[type="checkbox"]
+{
+	float:right;
+	position:relative;
+	top:5px;
+		line-height:18px;
+	font-size:24px;
+}
+label, #settings
+{
+	display:block;
+	border-top:1px solid #2B2E31;
+	border-bottom:1px solid #1F2123;
+	background:#212426;
+	color:#fff;
+	padding:.5em 10px;
+	text-shadow:0 1px 3px #000;
+	text-align:left;
+}
+label span
+{
+	float:right;
+}
+:-moz-any(label) span
+{  
+	opacity:0; 
+}
+[type="range"]
+{
+	-webkit-appearance:none;
+	background:-webkit-linear-gradient(transparent, transparent 12px, #2F3337 12px, #2F3337 13px, #181A1B 13px, #181A1B 14px, transparent 14px);
+	padding-bottom:10px;
+}
+[type='range']::-webkit-slider-thumb {  
+    -webkit-appearance: none;
+    background:#dedede -webkit-linear-gradient(45deg, #bfbfbf, #fff);
+    width:8px;
+    height:8px;
+    top:3px;
+    right:8px;
+    position:relative;
+    -webkit-transform:rotate(-45deg);
+}
+@media (min-height:400px)
+{
+	form
+	{
+		position:fixed;
+		top:0;
+		width:300px;
+	}
+} 
+    /* output */
+body
+{
+	 font-size:100%; 
+	 font-family:Helvetica, Arial, sans-serif; 
+}
+html, body, h1, h2, h3, h4, h5, h6, p, ul
+{
+	 margin:0; 
+	 padding:0; 
+}
+ul
+{
+	padding-left:2em;
+	margin:1.5em 0;
+}
+p
+{
+	 font-size:1em; 
+	 line-height:1.5; 
+	 margin:1.5em 0;
+	
+}
+li
+{
+	font-size:1em;
+	line-height:1.5;
+}
+h1
+{
+	 font-size:2.25em; 
+	 line-height:1.3333333333333333;
+}
+h2
+{
+	 font-size:1.75em; 
+	 line-height:1.7142857142857142; 
+}
+h3
+{
+	 font-size:1.5em; 
+	 line-height:1; 
+}
+h4
+{
+	 font-size:1.375em; 
+	 line-height:1.0909090909090908; 
+}
+h5
+{
+	 font-size:1.25em; 
+	 line-height:1.2; 
+}
+h6
+{
+	 font-size:1.125em; 
+	 line-height:1.3333333333333333; 
+}
+small
+{
+	 font-size:0.6875em; 
+	 line-height:2.1818181818181817; 
+}
+/* inline modal */
+.edit-block
+{
+	position:relative;
+}
+.text-modal
+{
+	position:absolute;
+	bottom:-70px;
+	width:300px;
+	opacity:0;
+}
+.hidden
+{
+	-webkit-animation:fadeOut .2s 0s 1 ease-out;
+	opacity:0;
+	pointer-events:none;
+}
+.visible
+{
+	-webkit-animation:fadeIn .2s 0s 1 ease-in;
+	opacity:1;
+}
+@-webkit-keyframes fadeIn {
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
+}
+@-webkit-keyframes fadeOut {
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+}
+.text-modal:after
+{
+	position:absolute;
+	content:'';
+	border:5px solid transparent;
+	border-bottom-color:#212426;
+	width:0;
+	height:0;
+	left:147px;
+	top:-10px;
+}
+.text-modal label
+{
+	border-top:0;
+}
+.edit-block :first-child
+{
+	cursor:pointer
+}
+h1:after,h2:after,h3:after,h4:after,h5:after,h6:after
+{
+	content:url('edit.png');
+	margin-left:5px;
+}
