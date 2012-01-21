@@ -3,11 +3,12 @@ var baseLineHeight = 1.5;
 var baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
 var targetHeadingSizes = [36,28,24,22,20,18];
 var smallPrintSize = 11;
+var showBaseGrid = true;
 window.onload = function()
 {
-	id("base-range").addEventListener("input", function() {initGrid()}, false);
+	id("base-range").addEventListener("input", function() {initRender()}, false);
 	id("base-range").addEventListener("input", function() {pxcounter()}, false);
-	id("lh").addEventListener("input", function() {initGrid()}, false);
+	id("lh").addEventListener("input", function() {initRender()}, false);
 	id("lh").addEventListener("input", function() {lhcounter()}, false);
 	/* headings */
 	id("h1-range").addEventListener("input", function(){updateHeading("h1")}, false);
@@ -23,24 +24,31 @@ window.onload = function()
 	id("heading4").addEventListener("click", function(){toggle("heading4")}, false);
 	id("heading5").addEventListener("click", function(){toggle("heading5")}, false);
 	id("heading6").addEventListener("click", function(){toggle("heading6")}, false);
+	/* options */
+	id("grid-toggle").addEventListener("change", function(){toggleGrid()}, false);
 	renderCSS();
 }
-function toggle(eID)
+function toggle(i)
 {
-	var modal = next(id(eID)); 
+	var modal = next(id(i)); 
 	modal.className = (modal.className == 'text-modal visible') ? 'text-modal hidden' : 'text-modal visible';
 }
 function id(i)
 {
 	return document.getElementById(i);
 }
-function next(elem)
+function next(i)
 {
 	do
 	{
-		elem = elem.nextSibling;
-	} while (elem && elem.nodeType != 1);
-    return elem;                
+		i = i.nextSibling;
+	} while (i && i.nodeType != 1);
+    return i;                
+}
+function toggleGrid()
+{
+	showBaseGrid = (showBaseGrid == true) ? false : true;
+	initGrid();
 }
 function initGrid()
 {
@@ -51,9 +59,20 @@ function initGrid()
 	baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
 	/*	Find the grid line height */
 	var baseLine = baseLineHeightPx - 1;
-	var grid = '-repeating-linear-gradient(top, transparent 0, transparent ' + baseLine + 'px, #ededed ' + baseLine + 'px, #ededed ' + baseLineHeightPx + 'px)';
-	id("content").style.background = '-webkit' + grid;
-	id("content").style.background = '-moz' + grid;
+	if (showBaseGrid)
+	{
+		var grid = '-repeating-linear-gradient(top, transparent 0, transparent ' + baseLine + 'px, #ededed ' + baseLine + 'px, #ededed ' + baseLineHeightPx + 'px)';
+		id("content").style.background = '-webkit' + grid;
+		id("content").style.background = '-moz' + grid;
+	}
+	else
+	{
+		id("content").style.background = 'transparent';
+	}
+}
+function initRender()
+{
+	initGrid();
 	renderCSS();
 }
 function pxcounter()
