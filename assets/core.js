@@ -6,10 +6,8 @@ var smallPrintSize = 11;
 var showBaseGrid = true;
 window.onload = function()
 {
-	id("base-range").addEventListener("input", function() {initRender()}, false);
-	id("base-range").addEventListener("input", function() {pxcounter()}, false);
-	id("lh").addEventListener("input", function() {initRender()}, false);
-	id("lh").addEventListener("input", function() {lhcounter()}, false);
+	id("base-range").addEventListener("input", function() {initRender();pxcounter();}, false);
+	id("lh").addEventListener("input", function() {initRender();lhcounter();}, false);
 	for(var i = 1; i < 7; i++)
 	{
 		assignHeadings(i);
