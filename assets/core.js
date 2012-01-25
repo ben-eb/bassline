@@ -10,23 +10,18 @@ window.onload = function()
 	id("base-range").addEventListener("input", function() {pxcounter()}, false);
 	id("lh").addEventListener("input", function() {initRender()}, false);
 	id("lh").addEventListener("input", function() {lhcounter()}, false);
-	/* headings */
-	id("h1-range").addEventListener("input", function(){updateHeading("h1")}, false);
-	id("h2-range").addEventListener("input", function(){updateHeading("h2")}, false);
-	id("h3-range").addEventListener("input", function(){updateHeading("h3")}, false);
-	id("h4-range").addEventListener("input", function(){updateHeading("h4")}, false);
-	id("h5-range").addEventListener("input", function(){updateHeading("h5")}, false);
-	id("h6-range").addEventListener("input", function(){updateHeading("h6")}, false);
-	/* modals */
-	id("heading1").addEventListener("click", function(){toggle("heading1")}, false);
-	id("heading2").addEventListener("click", function(){toggle("heading2")}, false);
-	id("heading3").addEventListener("click", function(){toggle("heading3")}, false);
-	id("heading4").addEventListener("click", function(){toggle("heading4")}, false);
-	id("heading5").addEventListener("click", function(){toggle("heading5")}, false);
-	id("heading6").addEventListener("click", function(){toggle("heading6")}, false);
+	for(var i = 1; i < 7; i++)
+	{
+		assignHeadings(i);
+	}
 	/* options */
 	id("grid-toggle").addEventListener("change", function(){toggleGrid()}, false);
 	renderCSS();
+}
+function assignHeadings(i)
+{
+	id("h" + i + "-range").addEventListener("input", function(){updateHeading("h" + i)}, false);
+	id("heading" + i).addEventListener("click", function(){toggle("heading" + i)}, false);
 }
 function toggle(i)
 {
