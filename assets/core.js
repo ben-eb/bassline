@@ -4,6 +4,8 @@ var baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
 var targetHeadingSizes = [36,28,24,22,20,18];
 var smallPrintSize = 11;
 var showBaseGrid = true;
+var outputBaseGrid = false;
+var baseGrid = "-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px)";
 window.onload = function()
 {
 	id("base-range").addEventListener("input", function() {initRender();pxcounter();}, false);
@@ -14,6 +16,7 @@ window.onload = function()
 	}
 	/* options */
 	id("grid-toggle").addEventListener("change", function(){toggleGrid()}, false);
+	id("gcode-toggle").addEventListener("change", function(){outputGridLines()}, false);
 	renderCSS();
 }
 function assignHeadings(i)
@@ -43,6 +46,11 @@ function toggleGrid()
 	showBaseGrid = (showBaseGrid == true) ? false : true;
 	initGrid();
 }
+function outputGridLines()
+{
+	outputBaseGrid = (outputBaseGrid == true) ? false : true;
+	renderCSS();
+}
 function initGrid()
 {
 	baseFontSize = id("base-range").value;
@@ -52,11 +60,11 @@ function initGrid()
 	baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
 	/*	Find the grid line height */
 	var baseLine = baseLineHeightPx - 1;
+	baseGrid = '-repeating-linear-gradient(top, transparent 0, transparent ' + baseLine + 'px, #ededed ' + baseLine + 'px, #ededed ' + baseLineHeightPx + 'px)';
 	if (showBaseGrid)
 	{
-		var grid = '-repeating-linear-gradient(top, transparent 0, transparent ' + baseLine + 'px, #ededed ' + baseLine + 'px, #ededed ' + baseLineHeightPx + 'px)';
-		id("content").style.background = '-webkit' + grid;
-		id("content").style.background = '-moz' + grid;
+		id("content").style.background = '-webkit' + baseGrid;
+		id("content").style.background = '-moz' + baseGrid;
 	}
 	else
 	{
@@ -87,6 +95,14 @@ function cssBlock(selector, properties)
 }
 function calculateLineHeight(targetFontSize)
 {
+	return returnLineHeight(targetFontSize) / targetFontSize;	
+}
+function calculateImageMargin(imageHeight)
+{
+	return (returnLineHeight(imageHeight) - imageHeight) / baseFontSize;
+}
+function returnLineHeight(targetFontSize)
+{
 	var targetLineHeight;
 	var lineHeightMultiplier = 1;
 	do
@@ -94,7 +110,7 @@ function calculateLineHeight(targetFontSize)
 		targetLineHeight = baseLineHeightPx * lineHeightMultiplier;
 		lineHeightMultiplier++;
 	}  while (targetLineHeight < targetFontSize);
-	return targetLineHeight / targetFontSize;	
+	return targetLineHeight;
 }
 function updateHeading(sel)
 {
@@ -106,12 +122,17 @@ function updateHeading(sel)
 }
 function renderCSS()
 {
+	/* reset */
+	var cssT = cssBlock("html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, li", ["margin:0", "padding:0"]);
 	/* body */
 	var size = Math.round((baseFontSize / 16) * 100);
 	document.body.style.fontSize = size + '%';
-	var cssT = cssBlock("body", ["font-size:" + size + "%", "font-family:Helvetica, Arial, sans-serif"]);
-	/* reset */
-	cssT += cssBlock("html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, li", ["margin:0", "padding:0"]);
+	var showGrid = "";
+	if (outputBaseGrid)
+	{
+		showGrid = ";\n\tbackground: -webkit" + baseGrid + ";\n\tbackground: -moz" + baseGrid;
+	}
+	cssT += cssBlock("body", ["font-size:" + size + "%", "font-family:Helvetica, Arial, sans-serif"+showGrid]);
 	/* paragraphs */
 	var paragraphs = document.getElementsByTagName("p");
 	for (var i = 0; i < paragraphs.length; i++)
