@@ -281,7 +281,7 @@ label span
 {
 	cursor:pointer
 }
-.edit-block :first-child:after
+.edit-block > :first-child:after
 {
 	content:url('edit.png');
 	margin-left:5px;
