@@ -4,7 +4,7 @@ Bassline is a tool that generates a baseline typographic grid, to help you estab
 
 ##Usage
 
-Simply drag the sliders on the left hand side to achieve the desired font size/line height combination. The changes will appear dynamically on the right hand side; copy the CSS from the textarea and paste it into your project. Elements marked with a pencil can have their font size adjusted independently of the main font size; these will *not* adjust when the base font size is changed.
+Simply drag the sliders on the left hand side to achieve the desired font size/line height combination. The changes will appear dynamically on the right hand side; copy the CSS from the textarea and paste it into your project.
 
 ##Issues
 

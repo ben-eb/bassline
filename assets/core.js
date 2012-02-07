@@ -1,7 +1,7 @@
 var baseFontSize = 16;
 var baseLineHeight = 1.5;
 var baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
-var targetHeadingSizes = [36,28,24,22,20,18];
+var targetHeadingSizes = [36,28,24,20,14,12];
 var smallPrintSize = 11;
 var showBaseGrid = true;
 var outputBaseGrid = false;
@@ -10,36 +10,24 @@ window.onload = function()
 {
 	id("base-range").addEventListener("input", function() {initRender();pxcounter();}, false);
 	id("lh").addEventListener("input", function() {initRender();lhcounter();}, false);
+	/* custom font sizes */
 	for(var i = 1; i < 7; i++)
 	{
 		assignHeadings(i);
 	}
+	id("small-range").addEventListener("input", updateSmallPrint, false);
 	/* options */
-	id("grid-toggle").addEventListener("change", function(){toggleGrid()}, false);
-	id("gcode-toggle").addEventListener("change", function(){outputGridLines()}, false);
+	id("grid-toggle").addEventListener("change", toggleGrid, false);
+	id("gcode-toggle").addEventListener("change", outputGridLines, false);
 	renderCSS();
 }
 function assignHeadings(i)
 {
 	id("h" + i + "-range").addEventListener("input", function(){updateHeading("h" + i)}, false);
-	id("heading" + i).addEventListener("click", function(){toggle("heading" + i)}, false);
-}
-function toggle(i)
-{
-	var modal = next(id(i)); 
-	modal.className = (modal.className == 'text-modal visible') ? 'text-modal hidden' : 'text-modal visible';
 }
 function id(i)
 {
 	return document.getElementById(i);
-}
-function next(i)
-{
-	do
-	{
-		i = i.nextSibling;
-	} while (i && i.nodeType != 1);
-    return i;                
 }
 function toggleGrid()
 {
@@ -95,7 +83,7 @@ function cssBlock(selector, properties)
 }
 function calculateLineHeight(targetFontSize)
 {
-	return returnLineHeight(targetFontSize) / targetFontSize;	
+	return decround(returnLineHeight(targetFontSize) / targetFontSize);	
 }
 function calculateImageMargin(imageHeight)
 {
@@ -120,6 +108,12 @@ function updateHeading(sel)
 	targetHeadingSizes[(tHFZ[1] - 1)] = targetHeadingFontSize;
 	renderCSS();
 }
+function updateSmallPrint()
+{
+	smallPrintSize = id("small-range").value;
+	id("small-value").innerHTML = smallPrintSize + 'px';
+	renderCSS();
+}
 function renderCSS()
 {
 	/* reset */
@@ -134,20 +128,20 @@ function renderCSS()
 	}
 	cssT += cssBlock("body", ["font-size:" + size + "%", "font-family:Helvetica, Arial, sans-serif"+showGrid]);
 	/* paragraphs */
-	var paragraphs = document.getElementsByTagName("p");
+	var paragraphs = document.getElementsByClassName("bass-p");
 	for (var i = 0; i < paragraphs.length; i++)
 	{
 		paragraphs[i].style.lineHeight = baseLineHeight;
 		paragraphs[i].style.margin = baseLineHeight + 'em 0';
 	}
-	cssT += cssBlock("p", ["font-size:1em", "line-height:" + baseLineHeight, "margin:" + baseLineHeight + 'em 0']);
+	cssT += cssBlock("p, cite", ["font-size:1em", "line-height:" + baseLineHeight, "margin:" + baseLineHeight + 'em 0']);
 	/* lists */
-	var lists = document.getElementsByTagName("ul");
+	var lists = document.getElementsByClassName("bass-list");
 	for (var i = 0; i < lists.length; i++)
 	{
 		lists[i].style.margin = baseLineHeight + 'em 0';
 	}
-	cssT += cssBlock("ul", ["padding-left:2em", "margin:" + baseLineHeight + 'em 0']);
+	cssT += cssBlock("ol, ul", ["padding-left:2em", "margin:" + baseLineHeight + 'em 0']);
 	var listItems = document.getElementsByTagName("li");
 	for (var i = 0; i < listItems.length; i++)
 	{
@@ -168,13 +162,14 @@ function renderCSS()
 	}
 	/* small text */
 	cssT += calculateCSS("small", id("small-print"), smallPrintSize);
+	cssT += cssBlock("cite, small", ["display: block"]);
 	id("code").value = cssT;
 }
 function calculateCSS(sel, obj, fontS)
 {
 	lh = calculateLineHeight(fontS);
 	obj.style.lineHeight = lh;
-	fz = (fontS / baseFontSize);
+	fz = decround(fontS / baseFontSize);
 	obj.style.fontSize = fz + 'em';
 	return cssBlock(sel, ["font-size:" + fz + "em", "line-height:" + lh]);
 }
