@@ -15,6 +15,17 @@ body
 	font-size:100%;
 	color:#444;
 }
+a
+{
+	color:#6A737D;
+	-webkit-transition:color .3s ease;
+	-moz-transition:color .3s ease;
+	transition:color .3s ease;
+}
+a:hover
+{
+	color:#555C65;
+}
 p
 {
 	font-size:1em;
@@ -70,6 +81,7 @@ cite, small
 {
 	display:block;
 }
+
 
 /*	Column wrappers
 	--------------------------------- */
