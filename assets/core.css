@@ -85,7 +85,30 @@ cite, small
 
 /*	Column wrappers
 	--------------------------------- */
-
+#bass-logo
+{
+	width:97px;
+	height:114px;
+	text-indent:-9999px;
+	padding:0;
+	line-height:1;
+	display:block;
+	clear:left;
+	float:left;
+	margin:20px 7px 10px 7px;
+	background:url("logo.png");
+	opacity:.1;
+	-webkit-transition:opacity 2s ease;
+	-moz-transition:opacity 2s ease;
+	transition:opacity 2s ease;
+}
+#bass-logo:hover
+{
+	opacity:1;
+	-webkit-transition:opacity .3s ease;
+	-moz-transition:opacity .3s ease;
+	transition:opacity .3s ease;
+}
 #wrapper, #wrap-right, #options
 {
 	position:relative;
