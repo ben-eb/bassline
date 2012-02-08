@@ -1,10 +1,16 @@
 /*	Basic page/text setup
 	--------------------------------- */
 
-html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, li
+html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, blockquote
 {
 	margin:0;
 	padding:0;
+}
+.bass-p, .bass-list, h1, h2, h3, h4, h5, h6, small
+{
+	-webkit-transition:margin .2s ease;
+	-moz-transition:margin .2s ease;
+	transition:margin .2s ease;
 }
 body
 {
@@ -248,6 +254,27 @@ label, #settings
 	text-shadow:0 1px 3px #fff;
 	color:#111;
 	font-weight:bold;
+	-webkit-user-select:none;
+}
+.option-heading .hidden
+{
+	color:#bdbdbd;
+}
+.option-heading .visible
+{
+	text-decoration:underline;
+}
+[id*="-options"].visible
+{
+	display:block;
+}
+[id*="-options"].hidden
+{
+	display:none;
+}
+#cufont-toggle
+{
+	cursor:pointer;
 }
 form span:first-child
 {
