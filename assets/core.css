@@ -88,7 +88,6 @@ cite, small
 	display:block;
 }
 
-
 /*	Column wrappers
 	--------------------------------- */
 #bass-logo
@@ -258,10 +257,13 @@ label, #settings
 }
 .option-heading .hidden
 {
+	-webkit-animation:fadeOut .1s 0s 1 ease-in;
 	color:#bdbdbd;
 }
 .option-heading .visible
 {
+	-webkit-animation:fadeIn .1s 0s 1 ease-in;
+	color:#111;
 	text-decoration:underline;
 }
 [id*="-options"].visible
@@ -311,4 +313,26 @@ label span
 	right:8px;
 	position:relative;
 	-webkit-transform:rotate(-45deg);
+}
+@-webkit-keyframes fadeIn
+{
+	0%
+	{
+		color:#bdbdbd;
+	}
+	100%
+	{
+		color:#111;
+	}
+}
+@-webkit-keyframes fadeOut
+{
+	0%
+	{
+		color:#111;
+	}
+	100%
+	{
+		color:#bdbdbd;
+	}
 }

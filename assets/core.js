@@ -1,12 +1,12 @@
 var baseSpacing = 1;
 var baseFontSize = 16;
-var baseLineHeight = 1.5;
-var baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
+var baseLineHeightPx = 24;
+var baseLineHeight = decround(baseLineHeightPx/baseFontSize);
 var targetHeadingSizes = [36,28,24,20,14,12];
-var targetHeadingSpaces = [0,0,2,0,0,1];
+var targetHeadingSpaces = [0,0,6,0,0,3];
 var smallPrintSize = 11;
-var smallPrintSpacing = 1;
-var spacingLabels = ['none', 'single', 'double'];
+var smallPrintSpacing = 3;
+var spacingLabels = ['none', 'single, top', 'single, bottom', 'single', 'double, top', 'double, bottom', 'double'];
 var showBaseGrid = true;
 var outputBaseGrid = false;
 var baseGrid = "-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px)";
@@ -68,9 +68,9 @@ function initGrid()
 {
 	baseFontSize = id("base-range").value;
 	baseFontSize = (baseFontSize < 9) ? 9 : baseFontSize;
-	baseLineHeight = decround(id("lh").value);
-	baseLineHeight = (baseLineHeight < 0.5) ? 0.5 : baseLineHeight;
-	baseLineHeightPx = Math.round(baseFontSize * baseLineHeight);
+	baseLineHeightPx = decround(id("lh").value);
+	baseLineHeightPx = (baseLineHeightPx < 9) ? 9 : baseLineHeightPx;
+	baseLineHeight = decround(baseLineHeightPx/baseFontSize);
 	/*	Find the grid line height */
 	var baseLine = baseLineHeightPx - 1;
 	baseGrid = '-repeating-linear-gradient(top, transparent 0, transparent ' + baseLine + 'px, #ededed ' + baseLine + 'px, #ededed ' + baseLineHeightPx + 'px)';
@@ -95,7 +95,7 @@ function pxcounter()
 }
 function lhcounter()
 {
-	id("lh-value").innerHTML = decround(id("lh").value);
+	id("lh-value").innerHTML = decround(id("lh").value) + 'px';
 }
 function sprcounter(i)
 {
@@ -159,8 +159,12 @@ function calculateSpacing(spacingValue, lineHeight)
 	switch (spacingValue)
 	{
 		case 0: returnMargin = 0; break;
-		case 1: returnMargin = lineHeight + 'em 0'; break;
-		case 2: returnMargin = lineHeight * 2 + 'em 0'; break;
+		case 1: returnMargin = lineHeight + 'em 0 0 0'; break;
+		case 2: returnMargin = '0 0 ' + lineHeight + 'em 0'; break;
+		case 3: returnMargin = lineHeight + 'em 0'; break;
+		case 4: returnMargin = lineHeight * 2 + 'em 0 0 0'; break;
+		case 5: returnMargin = '0 0 ' + lineHeight * 2 + 'em 0'; break;
+		case 6: returnMargin = lineHeight * 2 + 'em 0'; break;
 	}
 	return returnMargin;
 }
