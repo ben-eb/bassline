@@ -3,7 +3,7 @@ var baseFontSize = 16;
 var baseLineHeightPx = 24;
 var baseLineHeight = decround(baseLineHeightPx/baseFontSize);
 var targetHeadingSizes = [36,28,24,20,14,12];
-var targetHeadingSpaces = [0,0,6,0,0,3];
+var targetHeadingSpaces = [0,0,6,1,0,3];
 var smallPrintSize = 11;
 var smallPrintSpacing = 3;
 var spacingLabels = ['none', 'single, top', 'single, bottom', 'single', 'double, top', 'double, bottom', 'double'];
@@ -211,8 +211,9 @@ function renderCSS()
 		var headings = document.getElementsByTagName('h' + i);
 		for (var j=0; j<headings.length; j++)
 		{
-			cssT += calculateCSS("h" + i, headings[j], targetHeadingSizes[k], targetHeadingSpaces[k]);
+			var htemp = calculateCSS("h" + i, headings[j], targetHeadingSizes[k], targetHeadingSpaces[k]);
 		}
+		cssT += htemp;
 		k++;
 	}
 	/* small text */
@@ -222,6 +223,7 @@ function renderCSS()
 }
 function calculateCSS(sel, obj, fontS, spacing)
 {
+	// may need rewriting to allow more than one element/returned style
 	lh = calculateLineHeight(fontS);
 	obj.style.lineHeight = lh;
 	fz = decround(fontS / baseFontSize);
