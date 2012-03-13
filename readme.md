@@ -11,8 +11,9 @@ Simply drag the sliders on the left hand side to achieve the desired font size/l
 ###Known issues
 
 * Some combinations of font size and line height will break the grid generated. The best way around this problem is to try a slightly different line height/font size combination!
-* Because the grid lines are generated with a gradient, they will only appear in *new* versions of WebKit (Safari/Chrome) and Gecko (Firefox) based browsers.
-* This tool has not been designed to work in IE! Use a WebKit (best) or Gecko based browser.
+* Bassline makes heavy use of HTML5 sliders which are *not* supported in Firefox, and gradients to generate the grid lines (not supported by IE or Opera). For this reason it is best to run Bassline in either Safari or Chrome.
+* The image generator may break the grid lines at times, although the CSS output paired with real images seems to work.
+* **This tool has not been designed to work in IE!**
 
 ###Contact
 

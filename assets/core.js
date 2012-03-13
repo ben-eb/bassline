@@ -12,6 +12,8 @@ var outputBaseGrid = false;
 var baseGrid = "-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px)";
 window.onload = function()
 {
+	/* for the benefit of firefox */
+	id('image-counter').value = 0;
 	id("base-range").addEventListener("input", function() {initRender();pxcounter();}, false);
 	id("lh").addEventListener("input", function() {initRender();lhcounter();}, false);
 	id("spacing-srange").addEventListener("input",  function(){var i = sprcounter("spacing"); baseSpacing = i; renderCSS();}, false);
@@ -26,6 +28,39 @@ window.onload = function()
 	id("grid-toggle").addEventListener("change", toggleGrid, false);
 	id("gcode-toggle").addEventListener("change", outputGridLines, false);
 	id("cufont-toggle").addEventListener("click", toggleHeadingOptions, false);
+	/* image options */
+	id("add-image").addEventListener("click", addImageDialog, false);
+	addImageDialog();
+	renderCSS();
+}
+function addImageDialog()
+{
+	var numi = id('image-counter');
+	var num = (parseInt(numi.value) + 1);
+	numi.value = num;
+	/* options div */
+	var imopt = document.createElement('div');
+	imopt.setAttribute('id', 'image-opt'+num);
+	imopt.setAttribute('class', 'image-options');
+	imopt.innerHTML = "\n<label>Image "+num+"</label>\n<label class=\"small-label\">Width (px)</label><input type=\"text\" id=\"image"+num+"-width\" value=\"100\">\n<label class=\"small-label\">Height (px)</label><input type=\"text\" id=\"image"+num+"-height\" value=\"100\">\n";
+	id('image-settings').appendChild(imopt);
+	id('image' + num + '-width').addEventListener("change", function(){renderImages("image"+num);}, false);
+	id('image' + num + '-height').addEventListener("change", function(){renderImages("image"+num);}, false);
+	/* output img */
+	var cim = calculateImageMargin(100);
+	var imdiv = document.createElement('div');
+	imdiv.setAttribute('id', 'image' + num);
+	imdiv.setAttribute('style', 'width: 100px; height:100px; margin:' + cim + 'em, 0 0 0');
+	imdiv.innerHTML = "\n<span id=\"image" + num + "-span\">100*100</span>\n";
+	id('image-placeholder').appendChild(imdiv);
+}
+function renderImages(i)
+{
+	var w = id(i + "-width").value;
+	var h = id(i + "-height").value;
+	var m = calculateImageMargin(h);
+	id(i + "-span").innerHTML = w + "*" + h;
+	id(i).setAttribute('style', 'width:' + w + 'px; height:' + h + 'px; margin:' + m + 'em 0 0 0;');
 	renderCSS();
 }
 function assignHeadings(i)
@@ -119,6 +154,7 @@ function calculateLineHeight(targetFontSize)
 function calculateImageMargin(imageHeight)
 {
 	return (returnLineHeight(imageHeight) - imageHeight) / baseFontSize;
+	/*return (returnLineHeight(imageHeight) - imageHeight);*/
 }
 function returnLineHeight(targetFontSize)
 {
@@ -173,7 +209,7 @@ function renderCSS()
 	/* reset */
 	var cssT = cssBlock("html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, blockquote", ["margin:0", "padding:0"]);
 	/* body */
-	var size = Math.round((baseFontSize / 16) * 100);
+	var size = (baseFontSize / 16) * 100;
 	document.body.style.fontSize = size + '%';
 	var showGrid = "";
 	if (outputBaseGrid)
@@ -216,9 +252,19 @@ function renderCSS()
 		cssT += htemp;
 		k++;
 	}
+	/* images */
+	imgopts = document.getElementsByClassName('image-options');
+	for (var i = 0; i < imgopts.length; i++)
+	{
+		var j = ++i;
+		var w = id('image' + j + '-width').value;
+		var h = id('image' + j + '-height').value;
+		var m = calculateImageMargin(h);
+		cssT += cssBlock (".image" + j, ["width:" + w + "px", "height:" + h + "px", "margin:" + m + "em 0 0 0"]);
+	}
 	/* small text */
 	cssT += calculateCSS("small", id("small-print"), smallPrintSize, smallPrintSpacing);
-	cssT += cssBlock("cite, small", ["display: block"]);
+	cssT += cssBlock("cite, small, img", ["display:block"]);
 	id("code").value = cssT;
 }
 function calculateCSS(sel, obj, fontS, spacing)
