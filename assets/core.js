@@ -31,7 +31,6 @@ window.onload = function()
 	/* image options */
 	id("add-image").addEventListener("click", addImageDialog, false);
 	addImageDialog();
-	renderCSS();
 }
 function addImageDialog()
 {
@@ -53,6 +52,7 @@ function addImageDialog()
 	imdiv.setAttribute('style', 'width: 100px; height:100px; margin:' + cim + 'em, 0 0 0');
 	imdiv.innerHTML = "\n<span id=\"image" + num + "-span\">100*100</span>\n";
 	id('image-placeholder').appendChild(imdiv);
+	renderCSS();
 }
 function renderImages(i)
 {
@@ -256,7 +256,7 @@ function renderCSS()
 	imgopts = document.getElementsByClassName('image-options');
 	for (var i = 0; i < imgopts.length; i++)
 	{
-		var j = ++i;
+		var j = i + 1;
 		var w = id('image' + j + '-width').value;
 		var h = id('image' + j + '-height').value;
 		var m = calculateImageMargin(h);
