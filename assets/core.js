@@ -10,7 +10,7 @@ var spacingLabels = ['none', 'single, top', 'single, bottom', 'single', 'double,
 var showBaseGrid = true;
 var outputBaseGrid = false;
 var baseGrid = "-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px)";
-window.onload = function()
+window.addEventListener('load', function()
 {
 	/* for the benefit of firefox */
 	id('image-counter').value = 0;
@@ -31,7 +31,7 @@ window.onload = function()
 	/* image options */
 	id("add-image").addEventListener("click", addImageDialog, false);
 	addImageDialog();
-}
+}, false);
 function addImageDialog()
 {
 	var numi = id('image-counter');
