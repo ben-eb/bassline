@@ -146,8 +146,9 @@ cite, small, img
 	position:relative;
 	right:100%;
 	overflow:hidden;
-	background:-webkit-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px);
-	background:-moz-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px);
+	background-image:-webkit-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px);
+	background-image:-moz-repeating-linear-gradient(top, transparent 0, transparent 23px, #ededed 23px, #ededed 24px);
+	background-size:24px 24px;
 }
 #options
 {

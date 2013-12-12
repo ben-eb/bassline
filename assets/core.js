@@ -111,8 +111,9 @@ function initGrid()
 	baseGrid = '-repeating-linear-gradient(top, transparent 0, transparent ' + baseLine + 'px, #ededed ' + baseLine + 'px, #ededed ' + baseLineHeightPx + 'px)';
 	if (showBaseGrid)
 	{
-		id("content").style.background = '-webkit' + baseGrid;
-		id("content").style.background = '-moz' + baseGrid;
+		id("content").style.backgroundImage = '-webkit' + baseGrid;
+		id("content").style.backgroundImage = '-moz' + baseGrid;
+		id("content").style.backgroundSize = baseLineHeightPx + 'px ' + (baseLineHeightPx + 1) + 'px';
 	}
 	else
 	{
@@ -214,7 +215,9 @@ function renderCSS()
 	var showGrid = "";
 	if (outputBaseGrid)
 	{
-		showGrid = ";\n\tbackground: -webkit" + baseGrid + ";\n\tbackground: -moz" + baseGrid;
+		showGrid =  ";\n\tbackground: -webkit" + baseGrid +
+					";\n\tbackground: -moz" + baseGrid +
+					";\n\tbackground-size:" + baseLineHeightPx + 'px' + baseLineHeightPx + 'px';
 	}
 	cssT += cssBlock("body", ["font-size:" + size + "%", "font-family:Helvetica, Arial, sans-serif"+showGrid]);
 	/* paragraphs */
